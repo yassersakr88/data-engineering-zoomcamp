@@ -20,9 +20,9 @@ models:
         description: ""
         tests:
           - unique:
-            severity: warn
+              severity: warn
           - not_null:
-            severity: warn
+              severity: warn
 
       - name: vendorid
         data_type: int64
