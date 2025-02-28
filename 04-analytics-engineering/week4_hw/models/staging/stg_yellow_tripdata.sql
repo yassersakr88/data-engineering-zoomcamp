@@ -36,7 +36,13 @@ select
     cast(improvement_surcharge as numeric) as improvement_surcharge,
     cast(total_amount as numeric) as total_amount,
     coalesce({{ dbt.safe_cast("payment_type", api.Column.translate_type("integer")) }},0) as payment_type,
-    {{ get_payment_type_description('payment_type') }} as payment_type_description
+    {{ get_payment_type_description('payment_type') }} as payment_type_description,
+
+    -- New date dimensions
+    extract(year from pickup_datetime) as year,
+    extract(quarter from pickup_datetime) as quarter,
+    format('%d/Q%d', extract(year from pickup_datetime), extract(quarter from pickup_datetime)) as year_quarter,
+    extract(month from pickup_datetime) as month
 from tripdata
 where rn = 1
 

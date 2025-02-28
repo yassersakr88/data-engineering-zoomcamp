@@ -25,6 +25,12 @@ select
     
     -- trip info
     sr_flag,
+    
+    -- New date dimensions
+    extract(year from pickup_datetime) as year,
+    extract(quarter from pickup_datetime) as quarter,
+    format('%d/Q%d', extract(year from pickup_datetime), extract(quarter from pickup_datetime)) as year_quarter,
+    extract(month from pickup_datetime) as month
 from tripdata
 where rn = 1
 
