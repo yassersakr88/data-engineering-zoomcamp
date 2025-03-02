@@ -11,8 +11,8 @@ WITH fhv_trips AS (
         dropoff_datetime,
         EXTRACT(YEAR FROM pickup_datetime) AS year,
         EXTRACT(MONTH FROM pickup_datetime) AS month,
-        PULocationID AS pickup_locationid,
-        DOLocationID AS dropoff_locationid
+        pickup_locationid AS pickup_locationid,
+        dropoff_locationid AS dropoff_locationid
     FROM {{ ref('stg_fhv_tripdata') }}
 ),
 zone_mapping AS (
